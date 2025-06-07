@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+application {
+    mainClass = 'MapReduceJobsDriver'
+}
+
+group = 'org.yarlNet.com'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation("org.apache.hadoop:hadoop-mapreduce-client-core:3.2.1")
+    implementation("org.apache.hadoop:hadoop-common:3.2.1")
+    implementation("org.apache.hadoop:hadoop-mapreduce-client-jobclient:3.2.1")
+    implementation 'com.typesafe:config:1.4.3'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+shadowJar {
+    // Exclude all SLF4J bindings, which Hadoop provides
+    exclude 'org/slf4j/impl/**'
+    exclude 'META-INF/services/org.slf4j.*'
+    exclude 'org/apache/log4j/**'  // Optional: exclude log4j from your jar to avoid conflicts
+}
