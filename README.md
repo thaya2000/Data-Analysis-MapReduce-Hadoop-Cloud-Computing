@@ -90,7 +90,9 @@ Create an input directory in HDFS and upload your dataset file:
 hdfs dfs -mkdir -p /input
 hdfs dfs -put /path/to/your/dblp.xml /input/dblp.xml
 ```
+
 **Example:**
+
 ```bash
 hdfs dfs -put /mnt/f/Acadamic/UoR_7/EC7205_Cloud_Computing/Assignment_1/DataSet/dblp.xml /input/dblp.xml
 ```
@@ -102,7 +104,9 @@ Execute the MapReduce job using your compiled JAR file, specifying the input and
 ```bash
 hadoop jar /path/to/your/Data-Analysis-MapReduce-Hadoop-Cloud-Computing.jar /input/dblp.xml /output
 ```
+
 **Example:**
+
 ```bash
 hadoop jar /mnt/f/Acadamic/UoR_7/EC7205_Cloud_Computing/Assignment_1/Code_base/Ass_Cloud/build/libs/Data-Analysis-MapReduce-Hadoop-Cloud-Computing-1.0-SNAPSHOT-all.jar /input/dblp.xml /output
 ```
@@ -112,30 +116,34 @@ hadoop jar /mnt/f/Acadamic/UoR_7/EC7205_Cloud_Computing/Assignment_1/Code_base/A
 You can preview the results of any stage directly from HDFS using the following commands:
 
 **Authorship Score**
+
 ```bash
 hdfs dfs -cat /output/authorship_score_result/part-r-00000 | head
 ```
 
 **Bucketing by Number of Co-authors**
+
 ```bash
 hdfs dfs -cat /output/bucketing_by_num_coauthor_result/part-r-00000 | head
 ```
 
 **Bucketing by Publication Type**
+
 ```bash
 hdfs dfs -cat /output/bucketing_by_publication_type_result/part-r-00000 | head
 ```
 
 **Max, Median, Average Co-authors**
+
 ```bash
 hdfs dfs -cat /output/mean_median_max_result/part-r-00000 | head
 ```
 
 **Sorted by Unique Co-authors**
+
 ```bash
 hdfs dfs -cat /output/sort_complete_result/part-r-00000 | head
 ```
-
 
 ### Step 7: Retrieve Output from HDFS
 
@@ -144,7 +152,9 @@ Download the results from HDFS to your local machine:
 ```bash
 hdfs dfs -get /output ./
 ```
+
 **Example:**
+
 ```bash
 hdfs dfs -get /output ./results
 ```
@@ -153,23 +163,23 @@ hdfs dfs -get /output ./results
 
 ## 📊 Output Results
 
-| Stage                    | Output Format                            |
-|--------------------------|------------------------------------------|
-| Bucketing by Co-authors  | bucket_label → count                     |
-| Bucketing by Type        | publication_type → count                 |
-| Authorship Score         | author_name → score                      |
-| Max-Median-Average       | author_name → max; median; average       |
-| Sorted Co-authors        | author_name → number_of_unique_coauthors |
+| Stage                   | Output Format                            |
+| ----------------------- | ---------------------------------------- |
+| Bucketing by Co-authors | bucket_label → count                     |
+| Bucketing by Type       | publication_type → count                 |
+| Authorship Score        | author_name → score                      |
+| Max-Median-Average      | author_name → max; median; average       |
+| Sorted Co-authors       | author_name → number_of_unique_coauthors |
 
 Each stage's results are saved in a separate output directory.  
 You can find the output files in the `output/` folder of this repository, for example:
 
-- `output/authorship_score_result`
-- `output/bucketing_by_num_coauthor_result`
-- `output/bucketing_by_publication_type_result`
-- `output/mean_median_max_result`
-- `output/sort_complete_result`
-- `output/sort_intermediate_result`
+- [`output/authorship_score_result/part-r-00000`](output/authorship_score_result/part-r-00000)
+- [`output/bucketing_by_num_coauthor_result/part-r-00000`](output/bucketing_by_num_coauthor_result/part-r-00000)
+- [`output/bucketing_by_publication_type_result/part-r-00000`](output/bucketing_by_publication_type_result/part-r-00000)
+- [`output/mean_median_max_result/part-r-00000`](output/mean_median_max_result/part-r-00000)
+- [`output/sort_complete_result/part-r-00000`](output/sort_complete_result/part-r-00000)
+- [`output/sort_intermediate_result/part-r-00000`](output/sort_intermediate_result/part-r-00000)
 
 ## 📈 Output Results
 
@@ -228,13 +238,15 @@ Wei Liu	3890
 'Maseka Lesaoana	;3.0;2;1.6666666
 ...
 ```
+
 ---
+
+## 📄 Execution
+
+See the [execution log](logs/Execution_Log.txt) for detailed run information.
 
 ## 🧠 Future Work
 
-- Speed up parsing using regex instead of full XML DOM
 - Parallelize job execution
-- Integrate with Hive or Spark for ad-hoc querying
 
 ---
-
